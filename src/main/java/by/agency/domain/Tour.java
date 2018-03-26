@@ -1,6 +1,7 @@
 package by.agency.domain;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -81,30 +82,19 @@ public class Tour extends Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         Tour tour = (Tour) o;
-
-        if (duration != tour.duration) return false;
-        if (!photo.equals(tour.photo)) return false;
-        if (!date.equals(tour.date)) return false;
-        if (!hotel.equals(tour.hotel)) return false;
-        if (!type.equals(tour.type)) return false;
-        if (!description.equals(tour.description)) return false;
-        return cost.equals(tour.cost);
-
+        return duration == tour.duration &&
+                Objects.equals(photo, tour.photo) &&
+                Objects.equals(date, tour.date) &&
+                Objects.equals(hotel, tour.hotel) &&
+                type == tour.type &&
+                Objects.equals(description, tour.description) &&
+                Objects.equals(cost, tour.cost);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
-        result = 31 * result + (date != null ? date.hashCode() : 0);
-        result = 31 * result + duration;
-        result = 31 * result + (hotel != null ? hotel.hashCode() : 0);
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (cost != null ? cost.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), photo, date, duration, hotel, type, description, cost);
     }
 
     @Override

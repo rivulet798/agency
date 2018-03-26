@@ -1,6 +1,7 @@
 package by.agency.domain;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The User is entity class used for storage
@@ -53,23 +54,17 @@ public class User extends Entity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         User user = (User) o;
-
-        if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (tours != null ? !tours.equals(user.tours) : user.tours != null) return false;
-        return reviews != null ? reviews.equals(user.reviews) : user.reviews == null;
+        return Objects.equals(login, user.login) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(tours, user.tours) &&
+                Objects.equals(reviews, user.reviews);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (login != null ? login.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (tours != null ? tours.hashCode() : 0);
-        result = 31 * result + (reviews != null ? reviews.hashCode() : 0);
-        return result;
+
+        return Objects.hash(super.hashCode(), login, password, tours, reviews);
     }
 
     @Override

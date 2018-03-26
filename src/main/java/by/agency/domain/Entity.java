@@ -1,5 +1,7 @@
 package by.agency.domain;
 
+import java.util.Objects;
+
 /**
  * Entity is the abstract base class for travel contexts
  * which allows an application to define traveling, user and review entities.
@@ -36,9 +38,7 @@ public abstract class Entity{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Entity entity = (Entity) o;
-
         return id == entity.id;
     }
 
@@ -47,7 +47,7 @@ public abstract class Entity{
      */
     @Override
     public int hashCode() {
-        return id;
+        return Objects.hash(id);
     }
 
     /**

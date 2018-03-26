@@ -1,5 +1,7 @@
 package by.agency.domain;
 
+import java.util.Objects;
+
 /**
  * The Country is entity class used for storage
  * information about country.
@@ -24,18 +26,13 @@ public class Country extends Entity{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         Country country = (Country) o;
-
-        return name != null ? name.equals(country.name) : country.name == null;
-
+        return Objects.equals(name, country.name);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        return result;
+        return Objects.hash(super.hashCode(), name);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package by.agency.domain;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -53,23 +54,16 @@ public class Hotel extends Entity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-
         Hotel hotel = (Hotel) o;
-
-        if (stars != hotel.stars) return false;
-        if (name != null ? !name.equals(hotel.name) : hotel.name != null) return false;
-        if (phone != null ? !phone.equals(hotel.phone) : hotel.phone != null) return false;
-        return country != null ? country.equals(hotel.country) : hotel.country == null;
+        return stars == hotel.stars &&
+                Objects.equals(name, hotel.name) &&
+                Objects.equals(phone, hotel.phone) &&
+                Objects.equals(country, hotel.country);
     }
 
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (phone != null ? phone.hashCode() : 0);
-        result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + stars;
-        return result;
+        return Objects.hash(super.hashCode(), name, phone, country, stars);
     }
 
     @Override
